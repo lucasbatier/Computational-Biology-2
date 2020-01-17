@@ -91,16 +91,17 @@ def cdf_poisson(l, k):
     return np.exp(-l) * np.sum([l ** i / np.math.factorial(i) for i in range(0, k + 1)])
 
 
-def snp_with_cdf(kmers, cmean, error_rate=0.01):
+def snp_with_cdf(kmers_0, kmers_1, cmean, error_rate=0.01):
     '''
 
-    @param kmers: Dictionary of kmers
+    @param kmers_0: Dictionary of kmers to find SNPs
+    @param kmers_1: Dictionary of kmers to find 
     @param cmean: Mean coverage for the corresponding kmer
     @param error_rate: Minimum error rate to add the SNP
-    @return: array of SNPs
+    @return: array of SNPs 
     '''
-    kmers_snp = []
-    for kmer in kmers.keys():
-        if kmer not in kmers.keys() and cdf_poisson(cmean, kmers[kmer]) > error_rate:
-            kmers_snp = np.append(kmers_snp, kmer)
-    return kmers_snp
+    kmers_0_snp = []
+    for kmer in kmers_0.keys():
+    if kmer not in kmers_1.keys() and cdf_poisson(cmean, kmers_0[kmer]) > error_rate:
+        kmers_0_snp.append(kmer)
+    return kmers_0_snp
